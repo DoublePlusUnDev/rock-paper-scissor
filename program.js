@@ -3,7 +3,7 @@ const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 function loadFile(file){
     let currentPage = window.location.pathname.split("/").pop()
     let newLocation = window.location.pathname.replace(currentPage, file)
-    window.location.replace(file)
+    window.location.replace(newLocation)
 }
 
 function getCookie(name) {
@@ -15,7 +15,7 @@ function getCookie(name) {
 
 function main_button_pressed(){
     currentPage = window.location.pathname.split("/").pop()
-    let newPage
+
     switch (currentPage){
         case "index.html":
             loadFile("ready.html")
@@ -52,7 +52,7 @@ function main_button_pressed(){
 }
 
 function game_button_pressed(playerChoice){
-    enemyChoice = ["rock", "paper", "scissor"][randInt(0, 2)]
+    let enemyChoice = ["rock", "paper", "scissor"][randInt(0, 2)]
     document.cookie = `enemyChoice=${enemyChoice}; path=/; max-age=${60*60*24}`
 
     //win
@@ -94,10 +94,11 @@ if (scissorButton != null)
  
 
 //if win or lost page load last state from cookie
-currentPage = window.location.pathname.split("/").pop()
+let currentPage = window.location.pathname.split("/").pop()
    
 let enemyChoiceText = document.getElementById("enemy-choice")
 if (currentPage == "won.html" || currentPage == "lost.html"){
-    console.log("hey")
-    enemyChoiceText.textContent = `Enemy Chose: ${getCookie("enemyChoice").toUpperCase()}`
+    let enemyChoice = getCookie("enemyChoice")
+    if (enemyChoice != null)
+        enemyChoiceText.textContent = `Enemy Chose: ${enemyChoice.toUpperCase()}`
 }
