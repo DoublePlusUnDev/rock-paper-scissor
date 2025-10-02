@@ -1,16 +1,12 @@
 const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
 function loadFile(file){
-    console.log(window.location.pathname)
-    console.log(getCurrentPage())
     let newLocation
     if (currentPage.split(".").at(-1) != "html")
         newLocation = window.location.pathname + file
     else
         newLocation = window.location.pathname.replace(getCurrentPage(), file)
 
-    console.log(newLocation)
-    prompt()
     window.location.replace(newLocation)
 }
 
