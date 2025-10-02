@@ -22,9 +22,7 @@ function getCurrentPage(){
 }
 
 function mainButtonPressed(){
-    let currentPage = getCurrentPage()
-
-    switch (currentPage){
+    switch (getCurrentPage()){
         case "index.html":
             loadFile("ready.html")
             break
