@@ -1,6 +1,9 @@
 const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
 function loadFile(file){
+    console.log(window.location.pathname)
+    console.log(getCurrentPage())
+    console.log(newLocation)
     let newLocation = window.location.pathname.replace(getCurrentPage(), file)
     window.location.replace(newLocation)
 }
