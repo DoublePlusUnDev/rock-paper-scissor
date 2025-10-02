@@ -1,8 +1,7 @@
 const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
 function loadFile(file){
-    let currentPage = window.location.pathname.split("/").pop()
-    let newLocation = window.location.pathname.replace(currentPage, file)
+    let newLocation = window.location.pathname.replace(getCurrentPage(), file)
     window.location.replace(newLocation)
 }
 
@@ -13,8 +12,12 @@ function getCookie(name) {
     return null;
 }
 
-function main_button_pressed(){
-    currentPage = window.location.pathname.split("/").pop()
+function getCurrentPage(){
+    return window.location.pathname.split("/").pop()
+}
+
+function mainButtonPressed(){
+    let currentPage = getCurrentPage()
 
     switch (currentPage){
         case "index.html":
@@ -77,7 +80,7 @@ function game_button_pressed(playerChoice){
 
 const mainButton = document.getElementById("main-button");
 if (mainButton != null)
-    mainButton.addEventListener("click", main_button_pressed)
+    mainButton.addEventListener("click", mainButtonPressed)
 
 const rockButton = document.getElementById("rock");
 if (rockButton != null)
@@ -93,9 +96,14 @@ if (scissorButton != null)
 
  
 
+const currentPage = getCurrentPage()
+
+//make sure it has *.html it needs it to work
+if (currentPage.split(".").at(-1) !== "html"){
+    loadFile("index.html")
+}
+
 //if win or lost page load last state from cookie
-let currentPage = window.location.pathname.split("/").pop()
-   
 let enemyChoiceText = document.getElementById("enemy-choice")
 if (currentPage == "won.html" || currentPage == "lost.html"){
     let enemyChoice = getCookie("enemyChoice")
